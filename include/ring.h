@@ -9,9 +9,9 @@
 
 
 struct ring {
-    size_t size;
     size_t head;
     size_t tail;
+    const size_t size;
 
     bool loop;
 
@@ -26,8 +26,11 @@ typedef struct {
     size_t (* const head)(struct ring * ring);
     size_t (* const tail)(struct ring * ring);
 
-    size_t (* const open)(struct ring * ring);
-    size_t (* const used)(struct ring * ring);
+    size_t (* const hsize)(struct ring * ring);
+    size_t (* const tsize)(struct ring * ring);
+
+    void (* const hmove)(struct ring * ring, size_t len);
+    void (* const tmove)(struct ring * ring, size_t len);
 
 } ring_namespace;
 extern ring_namespace const ring;
