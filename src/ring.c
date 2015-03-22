@@ -37,7 +37,6 @@ static size_t tail(struct ring * ring) {
 }
 
 static size_t open(struct ring * ring) {
-    // TODO return less if loop must happen
     pthread_mutex_lock(&(ring->lock));
     size_t size = (ring->loop ? ring->tail : ring->size) - ring->head;
     pthread_mutex_unlock(&(ring->lock));
@@ -45,7 +44,6 @@ static size_t open(struct ring * ring) {
 }
 
 static size_t used(struct ring * ring) {
-    // TODO return less if loop must happen
     pthread_mutex_lock(&(ring->lock));
     size_t size = (ring->loop ? ring->size : ring->head) - ring->tail;
     pthread_mutex_unlock(&(ring->lock));
